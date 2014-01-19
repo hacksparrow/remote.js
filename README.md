@@ -18,7 +18,7 @@ To develop a remote controlled web app using Remote.js, you will need to create 
 
 ### Creating a transmitter
 
-Include `remote.transmitter.js` in the transmitter app's HTML page. Once included, you can create a transmitter as shown in this example.
+Include [remote.transmitter.js](https://raw2.github.com/hacksparrow/remote.js/master/dist/remote.transmitter.js) in the transmitter app's HTML page. Once included, you can create a transmitter as shown in this example.
 
     var signals = ['cat', 'HIDE CONTENT', 'github'];
     var t = Remote.transmitter(signals);
@@ -45,7 +45,7 @@ Include `remote.transmitter.js` in the transmitter app's HTML page. Once include
 
 ### Creating a receiver
 
-Include `remote.receiver.js` in the receiver app's HTML page. Once included, you can create a receiver as shown in this example.
+Include [remote.receiver.js](https://raw2.github.com/hacksparrow/remote.js/master/dist/remote.receiver.js) in the receiver app's HTML page. Once included, you can create a receiver as shown in this example.
 
     var signals = ['cat', 'HIDE CONTENT', 'foo'];
     var r = Remote.receiver(signals);
