@@ -1,11 +1,11 @@
 Remote.js
 =========
 
-Remote.js is a library for developing remote controlled web apps. It is wireless, does not require additional hardware, does not need a network - it works via audible frequencies.
+Remote.js is a library for developing remote controlled web apps. It is wireless and does not require additional hardware - it works via audible frequencies.
 
 ## Quick demo
 
-Note: App tested on Google Chrome only.
+Note: Apps tested on Google Chrome only.
 
 * [Open the demo app on your desktop / laptop](http://hacksparrow.github.io/remote.js/controlled.html)
 * [Open the remote controller app on your smartphone](http://hacksparrow.github.io/remote.js/controller.html)
@@ -14,11 +14,11 @@ Once the apps are loaded, point the remote at the demo, and press the buttons.
 
 ## How to use
 
-To develop a remote controlled we app using Remote.js, you will need to create a **transmitter** (remote controller) and a **receiver** (demo app). The receiver app listens for 'signals' from the transmitter and executes JavaScript code programmed by you, when it receives them.
+To develop a remote controlled web app using Remote.js, you will need to create a **transmitter** (remote controller) and a **receiver** (the web app). The  app listens for 'signals' from the transmitter and executes JavaScript code programmed by you, when it receives them.
 
 ### Creating a transmitter
 
-Include `remote.transmitter.js` in the transmitter app's HTML page. Once included, you can create a transmitter as shown in this example.
+Include [remote.transmitter.js](https://raw2.github.com/hacksparrow/remote.js/master/dist/remote.transmitter.js) in the transmitter app's HTML page. Once included, you can create a transmitter as shown in this example.
 
     var signals = ['cat', 'HIDE CONTENT', 'github'];
     var t = Remote.transmitter(signals);
@@ -45,7 +45,7 @@ Include `remote.transmitter.js` in the transmitter app's HTML page. Once include
 
 ### Creating a receiver
 
-Include `remote.receiver.js` in the receiver app's HTML page. Once included, you can create a receiver as shown in this example.
+Include [remote.receiver.js](https://raw2.github.com/hacksparrow/remote.js/master/dist/remote.receiver.js) in the receiver app's HTML page. Once included, you can create a receiver as shown in this example.
 
     var signals = ['cat', 'HIDE CONTENT', 'foo'];
     var r = Remote.receiver(signals);
