@@ -5,6 +5,8 @@ Remote.js is a library for developing remote controlled web apps. It is wireless
 
 ## Quick demo
 
+Note: App tested on Google Chrome only.
+
 * [Open the demo app on your desktop / laptop](http://hacksparrow.github.io/remote.js/controlled.html)
 * [Open the remote controller app on your smartphone](http://hacksparrow.github.io/remote.js/controller.html)
 
@@ -39,7 +41,7 @@ Include `remote.transmitter.js` in the transmitter app's HTML page. Once include
 
 1. Signal names can be anything of your choice.
 2. The signal array MUST be the same for both the transmitter and the receiver.
-3. Currently, a max of 32 signals is supported.
+3. Currently, a max of 13 signals is supported.
 
 ### Creating a receiver
 

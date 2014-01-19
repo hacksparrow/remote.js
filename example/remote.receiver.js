@@ -107,7 +107,7 @@ Remote.receiver = function (signals) {
         var context = new contextClass();
 
         // # source of sound
-        var source = context.createMediaStreamSource( stream );
+        var source = context.createMediaStreamSource(stream);
 
         // create a highpass filter
         var filter = context.createBiquadFilter();
