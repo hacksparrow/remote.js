@@ -13,14 +13,14 @@ gulp.task('build', function() {
 gulp.task('transmitter', function() {
   gulp.src(['src/remote.js', 'src/transmitter.js'])
     .pipe(concat('remote.transmitter.js'))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('./dist/'))
 });
 
 gulp.task('receiver', function() {
   gulp.src(['src/remote.js', 'src/receiver.js'])
     .pipe(concat('remote.receiver.js'))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('./dist/'))
 });
 
