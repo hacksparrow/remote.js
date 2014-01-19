@@ -57,18 +57,13 @@ Remote.transmitter = function(signals) {
 
         // beep the input frequency
         beep: function(freq) {
-          //oscillator.noteOff(0);
           oscillator = context.createOscillator();
           oscillator.type = oscillator.SQUARE;
           oscillator.connect(context.destination);
-          //oscillator.start(0);
-          //oscillator.disconnect();
           oscillator.frequency.value = freq;
           oscillator.start();
-          //oscillator.connect(context.destination);
           setTimeout(function() {
             oscillator.stop();
-            //oscillator.disconnect();
           }, this.beep_duration);
         },
 

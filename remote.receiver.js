@@ -51,7 +51,7 @@ Remote.receiver = function (signals) {
       },
 
       // some optimal default values. changing these values are likely to cause sensitivity issues
-      offset: 230, // required to index 0
+      offset: 448, // required to index 0 the first freq and match with the signal index
       minDecibels: -55, // register only if the db beyond -55
       fftSize: 1024 * 2, // how much data to process, large => accurate but slower
       highpassValue: 5000, // register only frequencies beyond this
@@ -107,7 +107,7 @@ Remote.receiver = function (signals) {
         var context = new contextClass();
 
         // # source of sound
-        var source = context.createMediaStreamSource( stream );
+        var source = context.createMediaStreamSource(stream);
 
         // create a highpass filter
         var filter = context.createBiquadFilter();
@@ -145,12 +145,11 @@ Remote.receiver = function (signals) {
             // this frequency is found beyond the min percentage
             if (percent > self.minPercentage) {
 
-              var freq = Math.round(freq_i / 10);
+              var freq = Math.round((self.offset - freq_i) / 10);
               var signal = Remote.signals[freq];
-              console.log(freq);
+
               if (last_freq !== freq && signal in Remote.mapping) {
                 
-
                 if (Remote.signals.indexOf(signal) > -1) {
                   var signalo = {
                     name: signal,
