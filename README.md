@@ -75,7 +75,7 @@ What the signal can do is entirely upto you, the developer. Anything you can do 
 
 ## Todo
 
-1. Increase the number of supported singnals
+1. Increase the number of supported signals
 2. Cross-browser fixes
 
 ## Background
