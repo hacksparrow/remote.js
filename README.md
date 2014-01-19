@@ -5,7 +5,7 @@ Remote.js is a library for developing remote controlled web apps. It is wireless
 
 ## Quick demo
 
-Note: Apps tested on Google Chrome only.
+**Note**: Apps tested on Google Chrome only.
 
 * [Open the demo app on your desktop / laptop](http://hacksparrow.github.io/remote.js/controlled.html)
 * [Open the remote controller app on your smartphone](http://hacksparrow.github.io/remote.js/controller.html)
@@ -73,6 +73,11 @@ What the signal can do is entirely upto you, the developer. Anything you can do 
 5. Malware
 6. Interesting browser extensions
 
+## Todo
+
+1. Increase the number of supported singnals
+2. Cross-browser fixes
+
 ## Background
 
 I set out to create a wireless data tranfer medium using acoustic frequencies, but faced some challenges because of which I paused worked on it, and instead created Remote.js out of the work done so far.
@@ -86,7 +91,7 @@ Equipment used: Web Audio API, Nexus 5 (transmitter), MacBook Pro (receiver).
 3. Frequency bleeding and interference is rampant. This can be avoided by keeping a significant gap between the bit-frequencies. Because of problem no. 2, using higher frequencies is almost impossible.
 4. Surprisingly, interference from a normal work / home background environment is very rare.
 5. The bitrate has to be very low. If you try to increase it, you lose accuracy in frequency detection.
-6. I used ASCII 'chracters' for higher bandwidth. Using binary 'symbols' binary files can be transferred more reliably, but the bandwidth would be way lower.
+6. I used ASCII 'symbols' for higher bandwidth. Using binary 'symbols' binary files can be transferred more reliably, but the bandwidth would be waaay lower.
 
 
 ## License (MIT)
