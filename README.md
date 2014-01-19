@@ -41,7 +41,7 @@ Include [remote.transmitter.js](https://raw2.github.com/hacksparrow/remote.js/ma
 
 1. Signal names can be anything of your choice.
 2. The signal array MUST be the same for both the transmitter and the receiver.
-3. Currently, a max of 13 signals is supported.
+3. Currently, a max of 13 signals are supported.
 
 ### Creating a receiver
 
