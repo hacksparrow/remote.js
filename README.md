@@ -5,8 +5,8 @@ Remote.js is a library for developing remote controlled web apps. It is wireless
 
 ## Quick demo
 
-[Open the demo app on your desktop / laptop](http://hacksparrow.github.io/remote.js/controlled.html)
- [Open the remote controller app on you smartphone](http://hacksparrow.github.io/remote.js/controller.html)
+* [Open the demo app on your desktop / laptop](http://hacksparrow.github.io/remote.js/controlled.html)
+* [Open the remote controller app on your smartphone](http://hacksparrow.github.io/remote.js/controller.html)
 
 Once the apps are loaded, point the remote at the demo, and press the buttons.
 
