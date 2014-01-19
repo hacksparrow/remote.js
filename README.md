@@ -14,7 +14,7 @@ Once the apps are loaded, point the remote at the demo, and press the buttons.
 
 ## How to use
 
-To develop a remote controlled we app using Remote.js, you will need to create a **transmitter** (remote controller) and a **receiver** (demo app). The receiver app listens for 'signals' from the transmitter and executes JavaScript code programmed by you, when it receives them.
+To develop a remote controlled web app using Remote.js, you will need to create a **transmitter** (remote controller) and a **receiver** (the web app). The  app listens for 'signals' from the transmitter and executes JavaScript code programmed by you, when it receives them.
 
 ### Creating a transmitter
 
