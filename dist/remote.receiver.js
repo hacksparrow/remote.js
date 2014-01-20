@@ -35,9 +35,7 @@ Remote.receiver = function (signals) {
         Remote.reverse_mapping[Remote.frequencies[i]] = signal;
       });
     }
-    else {
-      throw new Error('Number of signals should be less than or equal to ' + Remote.frequencies.length);
-    }
+    else { throw new Error('Number of signals should be less than or equal to ' + Remote.frequencies.length); }
 
     var receiver = {
 
@@ -45,9 +43,7 @@ Remote.receiver = function (signals) {
         if (Remote.signals.indexOf(signal) > -1) {
           this.handlers[signal] = listener;
         }
-        else {
-          throw new Error('Signal "' + signal + '" not found');
-        }
+        else { throw new Error('Signal "' + signal + '" not found'); }
       },
 
       // some optimal default values. changing these values are likely to cause sensitivity issues

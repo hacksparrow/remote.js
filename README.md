@@ -67,7 +67,7 @@ What the signal can do is entirely upto you, the developer. Anything you can do 
 ## Possible uses
 
 1. Media controls
-2. Games - remote cotrolled, multi-player
+2. Games - remote controlled, multi-player
 3. Slideshows
 4. Pranks
 5. Malware
@@ -80,7 +80,7 @@ What the signal can do is entirely upto you, the developer. Anything you can do 
 
 ## Background
 
-I set out to create a wireless data tranfer medium using acoustic frequencies, but faced some challenges because of which I paused worked on it, and instead created Remote.js out of the work done so far.
+I set out to create a wireless data transfer medium using acoustic frequencies, but faced some challenges because of which I paused worked on it, and instead created Remote.js out of the work done so far.
 
 The following are some interesting points from my experiment.
 
