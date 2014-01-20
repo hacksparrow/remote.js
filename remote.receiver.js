@@ -1,1 +1,184 @@
-var Remote={transmitter_instance:!1,receiver_instance:!1,signals:[],mapping:{},reverse_mapping:{},frequencies:[9650,9450,9240,9010,8800,8590,8370,8170,7950,7730,7510,7300,7070]};Remote.receiver=function(e){if(Remote.receiver_instance)return Remote.receiver_instance;if(e){if(Remote.signals=e,!(e.length<=Object.keys(Remote.frequencies).length))throw new Error("Number of signals should be less than or equal to "+Remote.frequencies.length);e.forEach(function(e,n){Remote.mapping[e]=Remote.frequencies[n],Remote.reverse_mapping[Remote.frequencies[n]]=e});var n={on:function(e,n){if(!(Remote.signals.indexOf(e)>-1))throw new Error('Signal "'+e+'" not found');this.handlers[e]=n},offset:448,minDecibels:-55,fftSize:2048,highpassValue:5e3,minPercentage:.75,handlers:{},init:function(){navigator.getUserMedia=navigator.getUserMedia||navigator.webkitGetUserMedia||navigator.mozGetUserMedia||navigator.msGetUserMedia,navigator.getUserMedia({audio:!0},function(e){window.contextClass=window.AudioContext||window.webkitAudioContext||window.mozAudioContext||window.oAudioContext||window.msAudioContext,window.requestAnimationFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(e){window.setTimeout(e,1e3/60)}}(),contextClass?Remote.receiver_instance.listen(e):alert("Web Audio API not available")},function(e){alert(e)})},listen:function t(e){function t(){var e=new Uint8Array(a.frequencyBinCount);a.getByteFrequencyData(e);for(var i=0;i<a.frequencyBinCount;i++){var o=e[i],r=o/256;if(r>n.minPercentage){var s=Math.round((n.offset-i)/10),m=Remote.signals[s];if(c!==s&&m in Remote.mapping)if(Remote.signals.indexOf(m)>-1){var u={name:m,time:Date.now()};Remote.receiver_instance.handlers[m](!1,u)}else Remote.receiver_instance.handlers[m](m+": not found");c=s}}window.requestAnimationFrame(t)}var n=this,i=new contextClass,o=i.createMediaStreamSource(e),r=i.createBiquadFilter();r.type=r.HIGHPASS,r.frequency.value=n.highpassValue,o.connect(r);var a=i.createAnalyser();a.minDecibels=n.minDecibels,a.fftSize=n.fftSize,r.connect(a);var s=i.createScriptProcessor(2048,1,1);a.connect(s),s.connect(i.destination);var c=!1;t()}};return n.init(),Remote.receiver_instance=n,n}throw new Error("Signal array not found")};
+
+var Remote = {
+
+  // these are references to the transmitter and receiver singletons
+  transmitter_instance: false,
+  receiver_instance: false,
+
+  // developer has to decide on the signal names - can't exceed the number for frequencies
+  signals: [],
+  // map of signal to frequency. eg: 'scroll up':4930, 'scroll down':5140
+  mapping: {},
+  // to quickly look up signal from frequency. eg: 4930:'scroll up', 5140:'scroll down'
+  reverse_mapping: {}
+
+  // these are HAND-PICKED frequencies which are most reliably transceived - currently 13 in number
+  , frequencies: [9650, 9450, 9240, 9010, 8800, 8590, 8370, 8170, 7950, 7730, 7510, 7300, 7070]
+
+};
+
+// ! developer should ensure the same signal array is passed to both, transmitter and receiver, else expect strange behaviors
+Remote.receiver = function (signals) {
+
+  if (Remote.receiver_instance) {
+    return Remote.receiver_instance;
+  }
+
+  if (signals) {
+
+    Remote.signals = signals;
+
+    // create the signal:frequency mapping, signals can't be more than freqs
+    if (signals.length <= Object.keys(Remote.frequencies).length) {
+      signals.forEach(function(signal, i) {
+        Remote.mapping[signal] = Remote.frequencies[i];
+        Remote.reverse_mapping[Remote.frequencies[i]] = signal;
+      });
+    }
+    else { throw new Error('Number of signals should be less than or equal to ' + Remote.frequencies.length); }
+
+    var receiver = {
+
+      on: function(signal, listener) {
+        if (Remote.signals.indexOf(signal) > -1) {
+          this.handlers[signal] = listener;
+        }
+        else { throw new Error('Signal "' + signal + '" not found'); }
+      },
+
+      // some optimal default values. changing these values are likely to cause sensitivity issues
+      offset: 448, // required to index 0 the first freq and match with the signal index
+      minDecibels: -55, // register only if the db beyond -55
+      fftSize: 1024 * 2, // how much data to process, large => accurate but slower
+      highpassValue: 5000, // register only frequencies beyond this
+      minPercentage: 0.75, // how much of a freq should be found in a sample - lower freqs are more sensitive than higher
+
+      // event handlers
+      handlers: {},
+
+      init: function init() {
+
+        navigator.getUserMedia = (
+          navigator.getUserMedia ||
+          navigator.webkitGetUserMedia ||
+          navigator.mozGetUserMedia ||
+          navigator.msGetUserMedia );
+
+        navigator.getUserMedia( { audio:true },
+
+          function(stream) {
+
+            window.contextClass = ( window.AudioContext || 
+              window.webkitAudioContext || 
+              window.mozAudioContext || 
+              window.oAudioContext || 
+              window.msAudioContext );
+
+            window.requestAnimationFrame = (function() {
+              return window.requestAnimationFrame  ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                window.oRequestAnimationFrame      ||
+                window.msRequestAnimationFrame     ||
+                function(callback){
+                  window.setTimeout(callback, 1000 / 60);
+              };
+            })();
+
+            // # the bulk of work goes under this condition
+            if (!contextClass) { alert('Web Audio API not available'); }
+            else { Remote.receiver_instance.listen(stream); }
+
+          },
+
+          function(err) { alert(err); }
+
+        );
+
+      },
+
+      listen: function listen(stream) {
+
+        var self = this;
+        var context = new contextClass();
+
+        // # source of sound
+        var source = context.createMediaStreamSource(stream);
+
+        // create a highpass filter
+        var filter = context.createBiquadFilter();
+        filter.type = filter.HIGHPASS;
+        filter.frequency.value = self.highpassValue;
+        source.connect(filter);
+
+        // # create an analyzer node
+        var analyser = context.createAnalyser();
+        analyser.minDecibels = self.minDecibels;
+        analyser.fftSize = self.fftSize;
+        filter.connect(analyser);
+        //analyser.connect(context.destination);
+
+        // # script node to add programming capability
+        var scriptNode = context.createScriptProcessor(2048, 1, 1);
+        analyser.connect(scriptNode);
+        scriptNode.connect(context.destination);
+
+        var listening = false;
+        var last_freq = false;
+        var delim_found = false;
+        var received_string = '';
+
+        function listen() {
+
+          var freqDomain = new Uint8Array(analyser.frequencyBinCount);
+          analyser.getByteFrequencyData(freqDomain);
+
+          for (var freq_i = 0; freq_i < analyser.frequencyBinCount; freq_i++) {
+
+            var value = freqDomain[freq_i];
+            var percent = value / 256;
+
+            // this frequency is found beyond the min percentage
+            if (percent > self.minPercentage) {
+
+              var freq = Math.round((self.offset - freq_i) / 10);
+              var signal = Remote.signals[freq];
+
+              if (last_freq !== freq && signal in Remote.mapping) {
+                
+                if (Remote.signals.indexOf(signal) > -1) {
+                  var signalo = {
+                    name: signal,
+                    time: Date.now()
+                  };
+                  Remote.receiver_instance.handlers[signal](false, signalo);
+                }
+                else Remote.receiver_instance.handlers[signal]((signal + ': not found'));
+                
+              }
+              
+              last_freq = freq;
+
+            } // end of decibel check
+
+          } // end of loop
+
+          window.requestAnimationFrame(listen);
+        }
+
+        listen();
+
+      }
+    }
+
+    receiver.init();
+
+    Remote.receiver_instance = receiver;
+    return receiver;
+  }
+
+  else {
+    throw new Error('Signal array not found');
+  }
+
+};
