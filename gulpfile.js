@@ -24,7 +24,6 @@ gulp.task('receiver', function() {
     .pipe(gulp.dest('./dist/'))
 });
 
-
 gulp.task('default', function() {
   gulp.run('build');
   gulp.watch(['src/*.js'], function(event) {
