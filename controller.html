@@ -60,10 +60,8 @@
     <li id="hb">HB</li>
     <li id="sa">SA</li>
     <li id="sb">SB</li>
-    <li id="anything">NA</li>
-    <li id="a0">A0</li>
-    <li id="kp">KP</li>
-    <li id="pp">PP</li>
+    <li id="kp">Kittens</li>
+    <li id="pp">Puppies</li>
     <li id="close">CLOSE</li>
     </ul>
     <div style="clear:both"></div>
@@ -89,14 +87,6 @@
 
   document.querySelector('#sb').addEventListener('click', function() {
     t.emit('Select B');
-  });
-
-  document.querySelector('#anything').addEventListener('click', function() {
-    t.emit('Name');
-  });
-
-  document.querySelector('#a0').addEventListener('click', function() {
-    t.emit('alert 0');
   });
 
   document.querySelector('#kp').addEventListener('click', function() {
