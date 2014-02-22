@@ -124,7 +124,9 @@ Remote.receiver = function (signals) {
         scriptNode.connect(context.destination);
 
         var listening = false;
-        var last_freq = false;
+        var last_freq = false; // need to do this to prevent 'multiple times' detection
+        var propagating = false; // event still propagating
+        var propagation_period = 350; // propagation over in 350 ms
         var delim_found = false;
         var received_string = '';
 
@@ -147,11 +149,27 @@ Remote.receiver = function (signals) {
               if (last_freq !== freq && signal in Remote.mapping) {
                 
                 if (Remote.signals.indexOf(signal) > -1) {
-                  var signalo = {
-                    name: signal,
-                    time: Date.now()
-                  };
-                  Remote.receiver_instance.handlers[signal](false, signalo);
+
+                  if (!propagating) {
+
+                    var signalo = {
+                      name: signal,
+                      time: Date.now()
+                    };
+
+                    Remote.receiver_instance.handlers[signal](false, signalo);
+                    // ready to listen again
+                    last_freq = false;
+
+                    propagating = true;
+
+                    setTimeout(function() {
+                      propagating = false;
+                    }, propagation_period);
+                  }
+
+                  // break out of this loop
+                  break;
                 }
                 else Remote.receiver_instance.handlers[signal]((signal + ': not found'));
                 
