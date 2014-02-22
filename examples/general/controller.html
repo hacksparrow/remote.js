@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Remote Controller</title>
+  <style type="text/css">
+    html, body, ul {
+      margin: 0;
+      padding: 0;
+      font-family: arial;
+      background: #333;
+    }
+    ul {
+      margin: 50px 0;
+    }
+    li {
+      float: left;
+      padding: 20px 30px;
+      width: 78px;
+      list-style: none;
+      text-align: center;
+      background: #7FB2FF;
+      margin: 3px;
+      border-radius: 20px;
+      cursor: pointer;
+      color: #fff;
+    }
+    #wrapper {
+      width: 300px;
+      margin: 0 auto;
+      -moz-transform:rotate(180deg);
+      -webkit-transform:rotate(180deg);
+      -ms-transform:rotate(180deg);
+    }
+    footer {
+      display: block;
+      text-align: center;
+      color: #666;
+      font-size: 10px;
+      margin-top: 50px;
+    }
+    #close {
+      width: 222px;
+      background: #900;
+    }
+    .orange {
+      background: orange;
+    }
+  </style>
+  <script src="../remote.transmitter.js"></script>
+</head>
+<body>
+
+  <div id="wrapper">
+
+    <ul>
+    <li id="ha">HA</li>
+    <li id="hb">HB</li>
+    <li id="sa">SA</li>
+    <li id="sb">SB</li>
+    <li id="kp" class="orange">Kittens</li>
+    <li id="pp" class="orange">Puppies</li>
+    <li id="close">CLOSE</li>
+    </ul>
+    <div style="clear:both"></div>
+    <footer>Powered by Remote.js</footer>
+  </div>
+  <script>
+
+  var signals = ['Hilight A', 'Hilight B', 'Select A', 'Select B', 'Name', 'alert 0', 'Kittens', 'Puppies', 'Close'];
+  var t = Remote.transmitter(signals);
+
+  // program the buttons
+  document.querySelector('#ha').addEventListener('click', function() {
+    t.emit('Hilight A');
+  });
+
+  document.querySelector('#hb').addEventListener('click', function() {
+    t.emit('Hilight B');
+  });
+
+  document.querySelector('#sa').addEventListener('click', function() {
+    t.emit('Select A');
+  });
+
+  document.querySelector('#sb').addEventListener('click', function() {
+    t.emit('Select B');
+  });
+
+  document.querySelector('#kp').addEventListener('click', function() {
+    t.emit('Kittens');
+  });
+
+  document.querySelector('#pp').addEventListener('click', function() {
+    t.emit('Puppies');
+  });
+
+  document.querySelector('#close').addEventListener('click', function() {
+    t.emit('Close');
+  });
+
+  </script>
+</body>
+</html>

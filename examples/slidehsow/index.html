@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Remote.js - Remote control for web apps using audio frequencies</title>
+
+		<meta name="description" content="Remote control for web apps using audio frequencies">
+		<meta name="author" content="Hage Yaapa">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<script src="../remote.receiver.js"></script>
+		<script>
+
+		  var signals = ['right', 'left', 'up', 'down'];
+  		var r = Remote.receiver(signals);
+
+   		r.on('right', function(error, signal) {
+    		document.querySelector('.navigate-right').click();
+ 			});
+
+   		r.on('left', function(error, signal) {
+    		document.querySelector('.navigate-left').click();
+ 			});
+
+   		r.on('up', function(error, signal) {
+    		document.querySelector('.navigate-up').click();
+ 			});
+
+   		r.on('down', function(error, signal) {
+    		document.querySelector('.navigate-down').click();
+ 			});
+
+		</script>
+
+	</head>
+
+	<body id="slideshow">
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Remote.js</h1>
+					<h3>Remote Control for Web Apps</h3>
+					<p>
+						<small>Created by <a href="http://www.hacksparrow.com">Hage Yaapa</a> / <a href="http://twitter.com/hacksparrow">@hacksparrow</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>What is Remote.js?</h2>
+					<p>
+						A JavaScript library to remotely control web apps using audio frequencies.
+					</p>
+				</section>
+
+				<section>
+					<section><h2>How does it Work?</h2></section>
+					<section><p>Map action to frequency</p></section>
+					<section><p>Transmitter: Send frequency</p></section>
+					<section><p>Receiver: Receive frequency</p></section>
+					<section><p>Receiver: Trigger action if frequency matches</p></section>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Possible Uses</h2>
+					<ul>
+						<li>Media controls</li>
+						<li>Games - remote controlled, multi-player</li>
+						<li>Slideshows</li>
+						<li>Malware</li>
+						<li>Interesting browser extensions</li>
+						<li>Pranks</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>THE END</h1>
+					<small>by <a href="http://www.hacksparrow.com">Hage Yaapa</a> / <a href="http://twitter.com/hacksparrow">@hacksparrow</a></small>
+					<p>
+						<a href="https://github.com/hacksparrow/remote.js">https://github.com/hacksparrow/remote.js</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+			});
+
+		</script>
+
+	</body>
+</html>
