@@ -1,6 +1,6 @@
 {
   "name": "remote",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Remote control for web apps",
   "directories": {
     "example": "example"

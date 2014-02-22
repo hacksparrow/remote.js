@@ -1,7 +1,7 @@
 Remote.js
 =========
 
-Remote.js is a library for developing remote controlled web apps. It is wireless and does not require additional hardware - it works via audible frequencies.
+Remote.js is a library for developing remote controlled web apps. It is wireless and does not require additional hardware - it works via audio frequencies.
 
 ## Quick demo
 
