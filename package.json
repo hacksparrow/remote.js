@@ -6,7 +6,7 @@
     "example": "example"
   },
   "devDependencies": {
-    "gulp": "~3.3.4",
+    "gulp": "~3.5.2",
     "gulp-concat": "~2.1.7",
     "gulp-uglify": "~0.1.0"
   },
